@@ -17,3 +17,20 @@ spec:
         image: nginx:1.19.2
         ports:
         - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    run: nginx-service
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+    name: http
+  selector:
+    run: nginx-deployment
